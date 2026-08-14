@@ -429,6 +429,20 @@ function showPopular(orders){
 
 }
 
+<script>
+document.getElementById("loginButton").onclick = function() {
+
+  const password = document.getElementById("password").value.trim();
+
+  if (password === "MYSTIQ2026") {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("dashboard").style.display = "block";
+  } else {
+    document.getElementById("error").textContent =
+      "❌ Kirish kodi noto‘g‘ri";
+  }
+
+};
 </script>
 
 </body>
