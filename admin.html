@@ -1,4 +1,163 @@
-<!DOCTYPE html>
+document.getElementById("loginButton").click();
+  }
+
+});
+
+
+async function loadOrders(){
+
+  try{
+
+    const response = await fetch(
+      API_URL +
+      "?action=orders&key=" +
+      encodeURIComponent(ADMIN_KEY)
+    );
+
+    const data = await response.json();
+
+    document.getElementById("loading").textContent = "";
+
+    if(!data.success){
+
+      document.getElementById("loading").textContent =
+        "❌ Buyurtmalarni olishda xatolik";
+
+      return;
+    }
+
+    const orders = data.orders || [];
+
+    showOrders(orders);
+
+    showStatistics(orders);
+
+    showPopular(orders);
+
+  }catch(error){
+
+    console.log(error);
+
+    document.getElementById("loading").textContent =
+      "❌ Server bilan bog‘lanib bo‘lmadi.";
+
+  }
+
+}
+
+
+function showOrders(orders){
+
+  const tbody =
+    document.getElementById("orders");
+
+  tbody.innerHTML = "";
+
+  orders.slice().reverse().forEach(function(o){
+
+    const tr = document.createElement("tr");
+
+    tr.innerHTML =
+      "<td>" + (o.id || "") + "</td>" +
+      "<td>" + (o.boxType || "") +
+      " #" + (o.boxNumber || "") + "</td>" +
+      "<td>" + (o.receiverName || "") + "</td>" +
+      "<td>" + (o.receiverAge || "") + "</td>" +
+      "<td>" +
+      (o.receiverPhone  o.senderPhone  "") +
+      "</td>" +
+      "<td>" + (o.address || "") + "</td>" +
+      "<td>" + (o.boxPrice || "") + "</td>" +
+      "<td>" + (o.status || "Yangi") + "</td>";
+
+    tbody.appendChild(tr);
+
+  });
+
+}
+
+
+function showStatistics(orders){
+
+  document.getElementById("total").textContent =
+    orders.length;
+
+  document.getElementById("newOrders").textContent =
+    orders.filter(function(o){
+      return !o.status || o.status === "Yangi";
+    }).length;
+
+  let money = 0;
+
+  orders.forEach(function(o){
+
+    const number =
+      String(o.boxPrice || "")
+      .replace(/[^\d]/g,"");
+
+    money += Number(number) || 0;
+
+  });
+
+  document.getElementById("money").textContent =
+    money.toLocaleString("uz-UZ") + " so'm";
+
+}
+
+
+function showPopular(orders){
+
+  const count = {};
+
+  orders.forEach(function(o){
+
+    if(!o.boxNumber) return;
+
+    const name =
+      (o.boxType || "") +
+      " #" +
+      o.boxNumber;
+
+    count[name] =
+      (count[name] || 0) + 1;
+
+  });
+
+
+  const sorted =
+    Object.entries(count)
+    .sort(function(a,b){
+      return b[1] - a[1];
+    })
+    .slice(0,10);
+
+
+  if(sorted.length === 0){
+
+    document.getElementById("popular").textContent =
+      "Hozircha buyurtmalar yo‘q.";
+
+    return;
+
+  }
+
+
+  document.getElementById("popular").innerHTML =
+    sorted.map(function(x){
+
+      return "<div style='padding:8px 0'>" +
+        "🎁 " + x[0] +
+        " — <b>" + x[1] + " marta</b>" +
+        "</div>";
+
+    }).join("");
+
+}
+
+</script>
+
+</body>
+</html><!DOCTYPE html>
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
