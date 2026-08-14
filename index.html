@@ -646,7 +646,8 @@ MYSTIQ BOX © 2026
 
 
 <script>
-
+const GOOGLE_SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbyyjrtlTK5HvroIbixfh685qYyIvKKMB4R30gCfjbmW3icCA6KedkG8FDbCkWqAmsqiVw/exec";
 /* ASOSIY O'ZGARUVCHILAR */
 
 let category = "";
@@ -912,12 +913,87 @@ function showOtherSummary(){
 
 /* BUYURTMA YAKUNI */
 
-function finishOrder(){
+async function finishOrder(){
 
-    document.getElementById("finalBox").textContent =
-        category + " BOX #" + boxNumber;
+    const orderData = {
 
-    goTo(5);
+        boxType: category,
+
+        boxNumber: boxNumber,
+
+        boxPrice: "",
+
+        receiverType: receiverType,
+
+        receiverName:
+            receiverType === "self"
+            ? document.getElementById("selfName").value.trim()
+            : document.getElementById("receiverName").value.trim(),
+
+        receiverAge:
+            receiverType === "self"
+            ? document.getElementById("selfAge").value.trim()
+            : document.getElementById("receiverAge").value.trim(),
+
+        senderName:
+            receiverType === "self"
+            ? ""
+            : document.getElementById("senderName").value.trim(),
+
+        senderPhone:
+            receiverType === "self"
+            ? document.getElementById("selfPhone").value.trim()
+            : document.getElementById("senderPhone").value.trim(),
+
+        receiverPhone:
+            receiverType === "self"
+            ? document.getElementById("selfPhone").value.trim()
+            : document.getElementById("receiverPhone").value.trim(),
+
+        address:
+            receiverType === "self"
+            ? document.getElementById("selfAddress").value.trim()
+            : document.getElementById("address").value.trim(),
+
+        message:
+            receiverType === "self"
+            ? document.getElementById("selfMessage").value.trim()
+            : document.getElementById("message").value.trim()
+    };
+
+
+    try {
+
+        await fetch(GOOGLE_SCRIPT_URL, {
+
+            method: "POST",
+
+            mode: "no-cors",
+
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+
+            body: JSON.stringify(orderData)
+
+        });
+
+
+        document.getElementById("finalBox").textContent =
+            category + " BOX #" + boxNumber;
+
+        goTo(5);
+
+
+    } catch(error) {
+
+        console.error(error);
+
+        alert(
+            "Buyurtmani yuborishda xatolik yuz berdi. Iltimos, qayta urinib ko‘ring."
+        );
+
+    }
 }
 
 </script>
