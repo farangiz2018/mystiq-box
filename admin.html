@@ -11,66 +11,65 @@
 body{
   margin:0;
   font-family:Arial,sans-serif;
-  background:linear-gradient(135deg,#fffaf5,#f8edf2);
+  background:linear-gradient(135deg,#fffaf5,#f5edf5);
   color:#3b2c32;
 }
 
 header{
-  background:rgba(255,255,255,.85);
-  padding:25px;
   text-align:center;
-  border-bottom:1px solid #eadde2;
+  padding:35px 20px;
+  background:white;
+  border-bottom:1px solid #eee;
 }
 
 .logo{
   font-family:Georgia,serif;
   font-size:30px;
-  letter-spacing:3px;
+  letter-spacing:4px;
 }
 
 .container{
-  max-width:1200px;
+  max-width:1100px;
   margin:auto;
-  padding:25px 15px;
+  padding:30px 15px;
 }
 
-.login{
-  max-width:400px;
-  margin:80px auto;
+#login{
+  max-width:430px;
+  margin:70px auto;
+  padding:35px;
   background:white;
-  padding:30px;
   border-radius:20px;
-  box-shadow:0 10px 35px #00000012;
+  box-shadow:0 10px 40px #0001;
   text-align:center;
 }
 
-input,select{
+#password{
   width:100%;
-  padding:12px;
-  margin:7px 0;
+  padding:14px;
   border:1px solid #ddd;
   border-radius:10px;
+  margin:15px 0;
+  font-size:16px;
 }
 
-button{
+#loginButton{
+  width:100%;
+  padding:14px;
   border:0;
-  padding:12px 20px;
   border-radius:10px;
+  background:#6d5b83;
+  color:white;
+  font-size:16px;
   cursor:pointer;
 }
 
-.login button{
-  width:100%;
-  background:#3b2c32;
-  color:white;
-}
-
 #error{
-  color:#b33;
-  margin-top:10px;
+  color:#c33;
+  margin-top:15px;
 }
 
-.dashboard{
+#dashboard{
   display:none;
 }
 
@@ -84,70 +83,48 @@ button{
   background:white;
   padding:20px;
   border-radius:18px;
-  box-shadow:0 7px 25px #0000000d;
+  box-shadow:0 5px 25px #0001;
 }
 
 .card small{
-  color:#88777d;
+  color:#777;
 }
 
 .card strong{
   display:block;
-  font-size:25px;
   margin-top:8px;
+  font-size:25px;
 }
 
-.popular{
+.boxes{
+  background:white;
+  margin-top:20px;
+  padding:20px;
+  border-radius:18px;
+}
+
+.orders{
+  margin-top:20px;
   background:white;
   padding:20px;
   border-radius:18px;
-  margin:20px 0;
-  box-shadow:0 7px 25px #0000000d;
-}
-
-.numbers{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-}
-
-.number{
-  background:#faf0f4;
-  padding:10px 15px;
-  border-radius:10px;
-}
-
-.search{
-  max-width:400px;
-  margin-bottom:15px;
-}
-
-.table{
   overflow:auto;
-  background:white;
-  border-radius:18px;
 }
 
 table{
   width:100%;
-  min-width:1000px;
   border-collapse:collapse;
+  min-width:800px;
 }
 
 th,td{
   padding:12px;
   border-bottom:1px solid #eee;
   text-align:left;
-  font-size:14px;
 }
 
 th{
-  background:#faf6f7;
-}
-
-.refresh{
-  background:#3b2c32;
-  color:white;
+  background:#faf7f8;
 }
 
 @media(max-width:700px){
@@ -165,99 +142,95 @@ th{
   <div>Sotuvchi boshqaruv paneli</div>
 </header>
 
-<div id="login" class="login">
+<div id="login">
 
   <h2>🔐 Sotuvchi paneli</h2>
 
   <p>Kirish kodini kiriting</p>
 
   <input
-    type="password"
     id="password"
+    type="password"
     placeholder="Kirish kodi"
   >
 
-  <button onclick="login()">Kirish</button>
+  <button id="loginButton" type="button">
+    Kirish
+  </button>
 
   <div id="error"></div>
 
 </div>
 
 
-<div id="dashboard" class="dashboard">
+<div id="dashboard">
 
 <div class="container">
 
-<div class="stats">
+  <div class="stats">
 
-  <div class="card">
-    <small>Bugungi buyurtmalar</small>
-    <strong id="today">0</strong>
+    <div class="card">
+      <small>Bugungi buyurtmalar</small>
+      <strong id="today">0</strong>
+    </div>
+
+    <div class="card">
+      <small>Jami buyurtmalar</small>
+      <strong id="total">0</strong>
+    </div>
+
+    <div class="card">
+      <small>Yangi buyurtmalar</small>
+      <strong id="newOrders">0</strong>
+    </div>
+
+    <div class="card">
+      <small>Jami tushum</small>
+      <strong id="money">0 so'm</strong>
+    </div>
+
   </div>
 
-  <div class="card">
-    <small>Jami buyurtmalar</small>
-    <strong id="total">0</strong>
+
+  <div class="boxes">
+
+    <h3>🔢 Eng ko‘p tanlangan box raqamlari</h3>
+
+    <div id="popular">
+      Hozircha buyurtmalar yo‘q.
+    </div>
+
   </div>
 
-  <div class="card">
-    <small>Yangi buyurtmalar</small>
-    <strong id="new">0</strong>
+
+  <div class="orders">
+
+    <h3>📦 Buyurtmalar</h3>
+
+    <div id="loading">
+      Buyurtmalar yuklanmoqda...
+    </div>
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Buyurtma</th>
+          <th>Box</th>
+          <th>Qabul qiluvchi</th>
+          <th>Yosh</th>
+          <th>Telefon</th>
+          <th>Manzil</th>
+          <th>Narx</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody id="orders"></tbody>
+
+    </table>
+
   </div>
-
-  <div class="card">
-    <small>Jami tushum</small>
-    <strong id="money">0 so'm</strong>
-  </div>
-
-</div>
-
-
-<div class="popular">
-
-  <h3>🔢 Eng ko‘p tanlangan raqamlar</h3>
-
-  <div id="numbers" class="numbers">
-    Hozircha ma'lumot yo‘q
-  </div>
-
-</div>
-
-
-<input
-  class="search"
-  id="search"
-  placeholder="🔎 Ism, buyurtma yoki raqam..."
-  oninput="showOrders()"
->
-
-<button class="refresh" onclick="loadOrders()">
-  ↻ Yangilash
-</button>
-
-
-<div class="table">
-
-<table>
-
-<thead>
-<tr>
-  <th>Buyurtma</th>
-  <th>Box</th>
-  <th>Qabul qiluvchi</th>
-  <th>Yosh</th>
-  <th>Telefon</th>
-  <th>Manzil</th>
-  <th>Narx</th>
-  <th>Status</th>
-</tr>
-</thead>
-
-<tbody id="orders"></tbody>
-
-</table>
-
-</div>
 
 </div>
 </div>
@@ -265,27 +238,39 @@ th{
 
 <script>
 
+const ADMIN_KEY = "MYSTIQ2026";
+
 const API_URL =
 "https://script.google.com/macros/s/AKfycbyyjrtlTK5HvroIbixfh685qYyIvKKMB4R30gCfjbmW3icCA6KedkG8FDbCkWqAmsqiVw/exec";
 
-const ADMIN_KEY = "MYSTIQ2026";
 
-let orders = [];
-
-
-function login(){
+document
+.getElementById("loginButton")
+.addEventListener("click", function(){
 
   const password =
-    document.getElementById("password").value;
+    document.getElementById("password").value.trim();
 
   if(password === ADMIN_KEY){
 
-    document.getElementById("login").style.display="none";
+    document.getElementById("login").style.display = "none";
 
-    document.getElementById("dashboard").style.display="block";
+    document.getElementById("dashboard").style.display = "block";
 
     loadOrders();
 
   }else{
 
-    document.getElementById("error").
+    document.getElementById("error").textContent =
+      "❌ Kirish kodi noto‘g‘ri";
+
+  }
+
+});
+
+
+document
+.getElementById("password")
+.addEventListener("keydown", function(e){
+
+  if(e.key === "Enter"){
