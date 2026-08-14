@@ -3,956 +3,697 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>MYSTIQ BOX — Sirli sovg'a</title>
+<title>MYSTIQ BOX</title>
 
 <style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
-    font-family:Georgia,"Times New Roman",serif;
-    background:
-        radial-gradient(circle at 15% 10%,rgba(218,190,135,.25),transparent 28%),
-        radial-gradient(circle at 85% 20%,rgba(218,190,135,.18),transparent 30%),
-        linear-gradient(135deg,#f8f3e9,#fffdf8,#f2e8d8);
-    color:#3d3024;
-    min-height:100vh;
+font-family:Georgia,"Times New Roman",serif;
+background:
+radial-gradient(circle at 15% 10%,rgba(218,190,135,.25),transparent 28%),
+radial-gradient(circle at 85% 20%,rgba(218,190,135,.18),transparent 30%),
+linear-gradient(135deg,#f8f3e9,#fffdf8,#f2e8d8);
+color:#3d3024;
+min-height:100vh;
 }
 
-header{
-    text-align:center;
-    padding:50px 20px 20px;
-}
+header{text-align:center;padding:45px 20px 20px}
 
 .logo{
-    font-size:38px;
-    font-weight:bold;
-    letter-spacing:6px;
-    color:#493827;
+font-size:38px;
+font-weight:bold;
+letter-spacing:6px;
+color:#493827;
 }
 
 .logo-line{
-    width:65px;
-    height:1px;
-    background:#b9975b;
-    margin:15px auto;
+width:65px;
+height:1px;
+background:#b9975b;
+margin:15px auto;
 }
 
 .tagline{
-    font-size:12px;
-    letter-spacing:2px;
-    color:#9b805a;
+font-size:12px;
+letter-spacing:2px;
+color:#9b805a;
 }
 
 .container{
-    max-width:850px;
-    margin:auto;
-    padding:20px;
+max-width:850px;
+margin:auto;
+padding:20px;
 }
 
-.screen{
-    display:none;
-}
-
-.screen.active{
-    display:block;
-}
+.screen{display:none}
+.screen.active{display:block}
 
 .welcome{
-    text-align:center;
-    margin:35px auto;
-    max-width:650px;
+text-align:center;
+margin:35px auto;
+max-width:650px;
 }
 
 .welcome h1{
-    font-size:30px;
-    font-weight:normal;
-    margin-bottom:15px;
+font-size:30px;
+font-weight:normal;
+margin-bottom:15px;
 }
 
 .welcome p{
-    color:#8d7861;
-    line-height:1.8;
+color:#8d7861;
+line-height:1.8;
 }
 
 .categories{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
 }
 
 .category{
-    background:rgba(255,255,255,.78);
-    border:1px solid rgba(185,151,91,.35);
-    border-radius:22px;
-    padding:38px 15px;
-    text-align:center;
-    cursor:pointer;
-    box-shadow:0 15px 35px rgba(102,76,40,.08);
-    transition:.3s;
+background:rgba(255,255,255,.8);
+border:1px solid rgba(185,151,91,.35);
+border-radius:22px;
+padding:40px 15px;
+text-align:center;
+cursor:pointer;
+box-shadow:0 15px 35px rgba(102,76,40,.08);
+transition:.3s;
 }
 
 .category:hover{
-    transform:translateY(-6px);
-    border-color:#b9975b;
+transform:translateY(-6px);
+border-color:#b9975b;
 }
 
 .icon{
-    font-size:46px;
-    margin-bottom:15px;
+font-size:46px;
+margin-bottom:15px;
 }
 
 .category-name{
-    font-weight:bold;
-    letter-spacing:2px;
+font-weight:bold;
+letter-spacing:2px;
 }
 
 .category-desc{
-    margin-top:8px;
-    color:#9a856d;
-    font-size:12px;
+margin-top:8px;
+color:#9a856d;
+font-size:12px;
 }
 
 .section-title{
-    text-align:center;
-    margin:30px 0;
+text-align:center;
+margin:30px 0;
 }
 
 .section-title h2{
-    font-size:28px;
-    font-weight:normal;
+font-size:28px;
+font-weight:normal;
 }
 
 .section-title p{
-    color:#9a856d;
-    margin-top:10px;
+color:#9a856d;
+margin-top:10px;
 }
 
 .mystery-note{
-    background:rgba(255,255,255,.7);
-    border:1px solid rgba(185,151,91,.3);
-    border-radius:18px;
-    padding:18px;
-    text-align:center;
-    color:#806b53;
-    line-height:1.6;
-    margin-bottom:25px;
+background:rgba(255,255,255,.7);
+border:1px solid rgba(185,151,91,.3);
+border-radius:18px;
+padding:18px;
+text-align:center;
+color:#806b53;
+line-height:1.6;
+margin-bottom:25px;
 }
 
 .box-grid{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:11px;
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:11px;
 }
 
 .box{
-    background:rgba(255,255,255,.8);
-    border:1px solid rgba(185,151,91,.3);
-    color:#574532;
-    border-radius:13px;
-    padding:17px 5px;
-    cursor:pointer;
-    font-family:Georgia,serif;
-    transition:.2s;
+background:rgba(255,255,255,.8);
+border:1px solid rgba(185,151,91,.3);
+color:#574532;
+border-radius:13px;
+padding:17px 5px;
+cursor:pointer;
+font-family:Georgia,serif;
+transition:.2s;
 }
 
 .box:hover{
-    transform:translateY(-3px);
-    border-color:#b9975b;
+transform:translateY(-3px);
+border-color:#b9975b;
 }
 
 .box.selected{
-    background:#b9975b;
-    color:white;
+background:#b9975b;
+color:white;
 }
 
 .form-card{
-    max-width:600px;
-    margin:30px auto;
-    background:rgba(255,255,255,.8);
-    border:1px solid rgba(185,151,91,.3);
-    border-radius:24px;
-    padding:28px;
-    box-shadow:0 15px 35px rgba(102,76,40,.08);
+max-width:600px;
+margin:30px auto;
+background:rgba(255,255,255,.8);
+border:1px solid rgba(185,151,91,.3);
+border-radius:24px;
+padding:28px;
+box-shadow:0 15px 35px rgba(102,76,40,.08);
 }
 
 .form-card h2{
-    text-align:center;
-    font-weight:normal;
-    margin-bottom:25px;
+text-align:center;
+font-weight:normal;
+margin-bottom:25px;
 }
 
 .choice{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-    margin-bottom:25px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+margin-bottom:25px;
 }
 
 .choice button{
-    padding:15px;
-    border-radius:12px;
-    border:1px solid #d5c1a0;
-    background:#fffdf9;
-    cursor:pointer;
-    color:#574532;
-    font-family:Georgia,serif;
+padding:15px;
+border-radius:12px;
+border:1px solid #d5c1a0;
+background:#fffdf9;
+cursor:pointer;
+color:#574532;
+font-family:Georgia,serif;
 }
 
 .choice button.active{
-    background:#b9975b;
-    color:white;
-    border-color:#a68149;
+background:#b9975b;
+color:white;
 }
 
-.form-group{
-    display:none;
-}
-
-.form-group.active{
-    display:block;
-}
+.form-group{display:none}
+.form-group.active{display:block}
 
 label{
-    display:block;
-    margin:17px 0 7px;
-    color:#67523d;
-    font-size:14px;
+display:block;
+margin:17px 0 7px;
+color:#67523d;
+font-size:14px;
 }
 
-input,
-textarea{
-    width:100%;
-    padding:14px;
-    border-radius:11px;
-    border:1px solid #d8c7ad;
-    background:#fffdf9;
-    color:#493827;
-    font-family:Georgia,serif;
-    outline:none;
-}
-
-input:focus,
-textarea:focus{
-    border-color:#b9975b;
+input,textarea{
+width:100%;
+padding:14px;
+border-radius:11px;
+border:1px solid #d8c7ad;
+background:#fffdf9;
+color:#493827;
+font-family:Georgia,serif;
+outline:none;
 }
 
 textarea{
-    min-height:110px;
-    resize:vertical;
+min-height:110px;
+resize:vertical;
 }
 
 .button{
-    display:block;
-    width:100%;
-    margin-top:25px;
-    padding:16px;
-    border:0;
-    border-radius:12px;
-    background:#a98650;
-    color:white;
+display:block;
+width:100%;
+margin-top:25px;
+padding:16px;
+border:0;
+border-radius:12px;
+background:#a98650;
+color:white;
 font-family:Georgia,serif;
-    font-size:14px;
-    letter-spacing:1px;
-    cursor:pointer;
-}
-
-.button:hover{
-    background:#92703e;
+font-size:14px;
+letter-spacing:1px;
+cursor:pointer;
 }
 
 .back{
-    display:block;
-    margin:25px auto;
-    background:none;
-    border:0;
-    color:#927c63;
-    cursor:pointer;
-    font-family:Georgia,serif;
+display:block;
+margin:25px auto;
+background:none;
+border:0;
+color:#927c63;
+cursor:pointer;
+font-family:Georgia,serif;
 }
 
 .summary{
-    max-width:600px;
-    margin:30px auto;
-    background:rgba(255,255,255,.85);
-    border:1px solid rgba(185,151,91,.35);
-    border-radius:24px;
-    padding:30px;
+max-width:600px;
+margin:30px auto;
+background:rgba(255,255,255,.85);
+border:1px solid rgba(185,151,91,.35);
+border-radius:24px;
+padding:30px;
 }
 
 .summary h2{
-    text-align:center;
-    font-weight:normal;
-    margin-bottom:25px;
+text-align:center;
+font-weight:normal;
+margin-bottom:25px;
 }
 
 .summary-row{
-    border-bottom:1px solid #eadfce;
-    padding:13px 0;
+border-bottom:1px solid #eadfce;
+padding:13px 0;
 }
 
 .summary-label{
-    font-size:12px;
-    color:#9a856d;
-    margin-bottom:5px;
+font-size:12px;
+color:#9a856d;
+margin-bottom:5px;
 }
 
 .summary-value{
-    color:#493827;
-    line-height:1.5;
+color:#493827;
+line-height:1.5;
 }
 
 .success{
-    text-align:center;
-    padding:25px;
+text-align:center;
+padding:25px;
 }
 
 .success-icon{
-    font-size:55px;
-    margin-bottom:15px;
+font-size:55px;
+margin-bottom:15px;
 }
 
 .success h2{
-    font-weight:normal;
-    margin-bottom:15px;
+font-weight:normal;
+margin-bottom:15px;
 }
 
 .success p{
-    color:#806b53;
-    line-height:1.7;
+color:#806b53;
+line-height:1.7;
 }
 
 .footer{
-    text-align:center;
-    padding:45px 20px 25px;
-    color:#a18d76;
-    font-size:11px;
-    letter-spacing:1px;
+text-align:center;
+padding:45px 20px 25px;
+color:#a18d76;
+font-size:11px;
+letter-spacing:1px;
 }
 
 @media(max-width:650px){
 
-    .logo{
-        font-size:28px;
-    }
+.logo{font-size:28px}
 
-    .categories{
-        grid-template-columns:1fr;
-    }
-
-    .box-grid{
-        grid-template-columns:repeat(4,1fr);
-    }
-
-    .form-card,
-    .summary{
-        padding:22px 17px;
-    }
-
+.categories{
+grid-template-columns:1fr;
 }
 
-@media(max-width:380px){
-
-    .box-grid{
-        grid-template-columns:repeat(3,1fr);
-    }
-
+.box-grid{
+grid-template-columns:repeat(4,1fr);
 }
 
+.form-card,.summary{
+padding:22px 17px;
+}
+
+}
 </style>
 </head>
 
-
 <body>
 
-
 <header>
-
-    <div class="logo">MYSTIQ BOX</div>
-
-    <div class="logo-line"></div>
-
-    <div class="tagline">
-        YOUR BOX · YOUR NUMBER · YOUR MYSTERY
-    </div>
-
+<div class="logo">MYSTIQ BOX</div>
+<div class="logo-line"></div>
+<div class="tagline">YOUR BOX · YOUR NUMBER · YOUR MYSTERY</div>
 </header>
-
 
 <div class="container">
 
-
-<!-- 1. CATEGORY -->
+<!-- 1-BET -->
 
 <section id="screen1" class="screen active">
 
-    <div class="welcome">
+<div class="welcome">
 
-        <h1>
-            Biror kishiga sirli sovg'a yuboring
-        </h1>
+<h1>Biror kishiga sirli sovg'a yuboring</h1>
 
-        <p>
-            Boxni tanlang, raqamini tanlang va
-            unga maxsus xabaringizni qoldiring.
-            <br>
-            Ichidagi sovg'a esa sirligicha qoladi. 🤫
-        </p>
+<p>
+Boxni tanlang, raqamini tanlang va unga
+maxsus xabaringizni qoldiring.
+<br>
+Ichidagi sovg'a esa sirligicha qoladi. 🤫
+</p>
 
-    </div>
+</div>
 
+<div class="categories">
 
-    <div class="categories">
+<div class="category" onclick="selectCategory('GIRL')">
+<div class="icon">🎀</div>
+<div class="category-name">GIRL BOX</div>
+<div class="category-desc">Qizlar uchun</div>
+</div>
 
-        <div class="category"
-             onclick="selectCategory('GIRL')">
+<div class="category" onclick="selectCategory('BOY')">
+<div class="icon">🖤</div>
+<div class="category-name">BOY BOX</div>
+<div class="category-desc">Yigitlar uchun</div>
+</div>
 
-            <div class="icon">🎀</div>
+<div class="category" onclick="selectCategory('KIDS')">
+<div class="icon">🧸</div>
+<div class="category-name">KIDS BOX</div>
+<div class="category-desc">Bolalar uchun</div>
+</div>
 
-            <div class="category-name">
-                GIRL BOX
-            </div>
-
-            <div class="category-desc">
-                Qizlar uchun
-            </div>
-
-        </div>
-
-
-        <div class="category"
-             onclick="selectCategory('BOY')">
-
-            <div class="icon">🖤</div>
-
-            <div class="category-name">
-                BOY BOX
-            </div>
-
-            <div class="category-desc">
-                Yigitlar uchun
-            </div>
-
-        </div>
-
-
-        <div class="category"
-             onclick="selectCategory('KIDS')">
-
-            <div class="icon">🧸</div>
-
-            <div class="category-name">
-                KIDS BOX
-            </div>
-
-            <div class="category-desc">
-                Bolalar uchun
-            </div>
-
-        </div>
-
-    </div>
-
+</div>
 </section>
 
 
-
-<!-- 2. BOX NUMBER -->
+<!-- 2-BET -->
 
 <section id="screen2" class="screen">
 
-    <div class="section-title">
+<div class="section-title">
+<h2 id="boxCategoryTitle"></h2>
+<p>O'zingizga yoqqan raqamni tanlang</p>
+</div>
 
-        <h2 id="boxCategoryTitle"></h2>
+<div class="mystery-note">
+✦ MYSTERY BOX ✦
+<br><br>
+Box ichidagi sovg'a oldindan ko'rsatilmaydi.
+<br>
+Sir faqat box ochilganda ochiladi. 🎁
+</div>
 
-        <p>
-            O'zingizga yoqqan raqamni tanlang
-        </p>
+<div id="boxGrid" class="box-grid"></div>
 
-    </div>
-
-
-    <div class="mystery-note">
-
-        ✦ MYSTERY BOX ✦
-
-        <br><br>
-
-        Box ichidagi sovg'a oldindan ko'rsatilmaydi.
-        <br>
-        Sir faqat box ochilganda ochiladi. 🎁
-
-    </div>
-
-
-    <div id="boxGrid" class="box-grid"></div>
-
-
-    <button class="back" onclick="goTo(1)">
-        ← Orqaga
-    </button>
+<button class="back" onclick="goTo(1)">
+← Orqaga
+</button>
 
 </section>
 
 
-
-<!-- 3. KIM UCHUN -->
+<!-- 3-BET -->
 
 <section id="screen3" class="screen">
 
-    <div class="form-card">
+<div class="form-card">
 
-        <h2>
-            💌 Bu sovg'a kim uchun?
-        </h2>
+<h2>💌 Bu sovg'a kim uchun?</h2>
 
+<div class="choice">
 
-        <div class="choice">
+<button id="selfBtn" onclick="chooseReceiver('self')">
+🎁 O'zim uchun
+</button>
 
-            <button
-                id="selfBtn"
-                onclick="chooseReceiver('self')">
-
-                🎁 O'zim uchun
-
-            </button>
-
-
-            <button
-                id="otherBtn"
-                onclick="chooseReceiver('other')">
+<button id="otherBtn" onclick="chooseReceiver('other')">
 💌 Boshqa inson uchun
+</button>
 
-            </button>
-
-        </div>
-
+</div>
 
 
-        <!-- O'ZIM UCHUN -->
+<!-- O'ZIM UCHUN -->
 
-        <div id="selfForm" class="form-group">
+<div id="selfForm" class="form-group">
 
-            <label>
-                Ismingiz *
-            </label>
+<label>Ismingiz *</label>
 
-            <input
-                id="selfName"
-                type="text"
-                placeholder="Ismingiz"
-            >
+<input
+id="selfName"
+type="text"
+placeholder="Ismingiz"
+>
 
+<label>Yoshingiz *</label>
 
-            <label>
-                Yoshingiz *
-            </label>
+<input
+id="selfAge"
+type="number"
+placeholder="Masalan: 24"
+>
 
-            <input
-                id="selfAge"
-                type="number"
-                placeholder="Masalan: 24"
-                min="1"
-                max="120"
-            >
+<label>Box ichidagi xabar 💌</label>
 
+<textarea
+id="selfMessage"
+maxlength="300"
+placeholder="O'zingiz uchun maxsus xabar..."
+></textarea>
 
-            <label>
-                Box ichiga yozmoqchi bo'lgan gapingiz 💌
-            </label>
+<label>Telefon raqamingiz *</label>
 
-            <textarea
-                id="selfMessage"
-                maxlength="300"
-                placeholder="O'zingiz uchun maxsus xabar..."
-            ></textarea>
+<input
+id="selfPhone"
+type="tel"
+placeholder="+998 90 123 45 67"
+>
 
+<label>Yetkazib berish manzili *</label>
 
-            <label>
-                Telefon raqamingiz *
-            </label>
+<textarea
+id="selfAddress"
+placeholder="Shahar, tuman, ko'cha, uy..."
+></textarea>
 
-            <input
-                id="selfPhone"
-                type="tel"
-                placeholder="+998 90 123 45 67"
-            >
+<button class="button" onclick="showSelfSummary()">
+DAVOM ETISH →
+</button>
 
-
-            <label>
-                Yetkazib berish manzili *
-            </label>
-
-            <textarea
-                id="selfAddress"
-                placeholder="Shahar, tuman, ko'cha, uy..."
-            ></textarea>
+</div>
 
 
-            <button
-                class="button"
-                onclick="showSelfSummary()">
+<!-- BOSHQA INSON UCHUN -->
 
-                DAVOM ETISH →
+<div id="otherForm" class="form-group">
 
-            </button>
+<label>Qabul qiluvchining ismi *</label>
 
-        </div>
+<input
+id="receiverName"
+type="text"
+placeholder="Masalan: Madina"
+>
 
+<label>Qabul qiluvchining yoshi *</label>
 
+<input
+id="receiverAge"
+type="number"
+placeholder="Masalan: 24"
+>
 
-        <!-- BOSHQA INSON UCHUN -->
+<label>Box ichidagi xabar 💌</label>
 
-        <div id="otherForm" class="form-group">
+<textarea
+id="message"
+maxlength="300"
+placeholder="Seni xursand qilish uchun kichik bir sir yubordim ❤️"
+></textarea>
 
-            <label>
-                Qabul qiluvchining ismi *
-            </label>
+<label>Yuboruvchining ismi *</label>
 
-            <input
-                id="receiverName"
-                type="text"
-                placeholder="Masalan: Madina"
-            >
+<input
+id="senderName"
+type="text"
+placeholder="Ismingiz"
+>
 
+<label>Yuboruvchining telefoni *</label>
 
-            <label>
-                Qabul qiluvchining yoshi *
-            </label>
+<input
+id="senderPhone"
+type="tel"
+placeholder="+998 90 123 45 67"
+>
 
-            <input
-                id="receiverAge"
-                type="number"
-                placeholder="Masalan: 24"
-                min="1"
-                max="120"
-            >
+<label>Qabul qiluvchining telefoni *</label>
 
+<input
+id="receiverPhone"
+type="tel"
+placeholder="+998 90 123 45 67"
+>
 
-            <label>
-                Box ichiga yozmoqchi bo'lgan gapingiz 💌
-            </label>
+<label>Yetkazib berish manzili *</label>
 
-            <textarea
-                id="message"
-                maxlength="300"
-                placeholder="Masalan: Seni xursand qilish uchun kichik bir sir yubordim ❤️"
-            ></textarea>
+<textarea
+id="address"
+placeholder="Shahar, tuman, ko'cha, uy..."
+></textarea>
 
+<button class="button" onclick="showOtherSummary()">
+DAVOM ETISH →
+</button>
 
-            <label>
-                Yuboruvchining ismi *
-            </label>
+</div>
 
-            <input
-                id="senderName"
-                type="text"
-                placeholder="Ismingiz"
-            >
+</div>
 
-
-            <label>
-                Yuboruvchining telefon raqami *
-            </label>
-
-            <input
-                id="senderPhone"
-                type="tel"
-                placeholder="+998 90 123 45 67"
-            >
-
-
-            <label>
-                Qabul qiluvchining telefon raqami *
-            </label>
-
-            <input
-                id="receiverPhone"
-                type="tel"
-                placeholder="+998 90 123 45 67"
-            >
-
-
-            <label>
-                Yetkazib berish manzili *
-            </label>
-
-            <textarea
-                id="address"
-                placeholder="Shahar, tuman, ko'cha, uy..."
-            ></textarea>
-
-
-            <button
-                class="button"
-                onclick="showOtherSummary()">
-
-                DAVOM ETISH →
-
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <button
-        class="back"
-        onclick="goTo(2)">
-
-        ← Orqaga
-
-    </button>
+<button class="back" onclick="goTo(2)">
+← Orqaga
+</button>
 
 </section>
 
 
-
-<!-- 4. BUYURTMA XULOSASI -->
+<!-- 4-BET -->
 
 <section id="screen4" class="screen">
 
-    <div class="summary">
+<div class="summary"><h2>🎁 Buyurtmangiz</h2>
 
-        <h2>
-            🎁 Buyurtmangiz
-        </h2>
-
-
-        <div class="summary-row">
-
-            <div class="summary-label">
-                BOX
-            </div>
-
-            <div
-                class="summary-value"
-                id="summaryBox">
-            </div>
-
-        </div>
-
-
-        <div class="summary-row">
-
-            <div class="summary-label">
-                QABUL QILUVCHI
+<div class="summary-row">
+<div class="summary-label">BOX</div>
+<div class="summary-value" id="summaryBox"></div>
 </div>
 
-            <div
-                class="summary-value"
-                id="summaryReceiver">
-            </div>
+<div class="summary-row">
+<div class="summary-label">QABUL QILUVCHI</div>
+<div class="summary-value" id="summaryReceiver"></div>
+</div>
 
-        </div>
+<div class="summary-row">
+<div class="summary-label">YOSH</div>
+<div class="summary-value" id="summaryAge"></div>
+</div>
 
+<div class="summary-row">
+<div class="summary-label">YUBORUVCHI</div>
+<div class="summary-value" id="summarySender"></div>
+</div>
 
-        <div class="summary-row">
+<div class="summary-row">
+<div class="summary-label">BOX ICHIDAGI XABAR</div>
+<div class="summary-value" id="summaryMessage"></div>
+</div>
 
-            <div class="summary-label">
-                YOSH
-            </div>
+<div class="summary-row">
+<div class="summary-label">TELEFON</div>
+<div class="summary-value" id="summaryPhone"></div>
+</div>
 
-            <div
-                class="summary-value"
-                id="summaryAge">
-            </div>
+<div class="summary-row">
+<div class="summary-label">MANZIL</div>
+<div class="summary-value" id="summaryAddress"></div>
+</div>
 
-        </div>
+<button class="button" onclick="finishOrder()">
+BUYURTMANI TASDIQLASH
+</button>
 
+</div>
 
-        <div class="summary-row">
-
-            <div class="summary-label">
-                YUBORUVCHI
-            </div>
-
-            <div
-                class="summary-value"
-                id="summarySender">
-            </div>
-
-        </div>
-
-
-        <div class="summary-row">
-
-            <div class="summary-label">
-                BOX ICHIDAGI XABAR
-            </div>
-
-            <div
-                class="summary-value"
-                id="summaryMessage">
-            </div>
-
-        </div>
-
-
-        <div class="summary-row">
-
-            <div class="summary-label">
-                TELEFON
-            </div>
-
-            <div
-                class="summary-value"
-                id="summaryPhone">
-            </div>
-
-        </div>
-
-
-        <div class="summary-row">
-
-            <div class="summary-label">
-                MANZIL
-            </div>
-
-            <div
-                class="summary-value"
-                id="summaryAddress">
-            </div>
-
-        </div>
-
-
-        <button
-            class="button"
-            onclick="finishOrder()">
-
-            BUYURTMANI TASDIQLASH
-
-        </button>
-
-    </div>
-
-
-    <button
-        class="back"
-        onclick="goTo(3)">
-
-        ← Ma'lumotlarni o'zgartirish
-
-    </button>
+<button class="back" onclick="goTo(3)">
+← Ma'lumotlarni o'zgartirish
+</button>
 
 </section>
 
 
-
-<!-- 5. YAKUN -->
+<!-- 5-BET -->
 
 <section id="screen5" class="screen">
 
-    <div class="summary">
+<div class="summary">
 
-        <div class="success">
+<div class="success">
 
-            <div class="success-icon">
-                🎁
-            </div>
+<div class="success-icon">🎁</div>
 
-            <h2>
-                Buyurtmangiz qabul qilindi!
-            </h2>
+<h2>Buyurtmangiz qabul qilindi!</h2>
 
-            <p>
+<p>
 
-                MYSTIQ BOX
+MYSTIQ BOX
 
-                <br><br>
+<br><br>
 
-                <b id="finalBox"></b>
+<b id="finalBox"></b>
 
-                <br><br>
+<br><br>
 
-                Sirli sovg'angiz tayyorlanadi.
+Sirli sovg'angiz tayyorlanadi.
 
-                <br><br>
+<br><br>
 
-                Qabul qiluvchi boxni ochmaguncha
-                ichidagi sovg'a sir bo'lib qoladi. 🤫
+Qabul qiluvchi boxni ochmaguncha
+ichidagi sovg'a sir bo'lib qoladi. 🤫
 
-            </p>
+</p>
 
-        </div>
+</div>
 
-    </div>
+</div>
 
 </section>
 
-
 </div>
-
 
 <div class="footer">
-
-    MYSTIQ BOX © 2026
-
+MYSTIQ BOX © 2026
 </div>
-
 
 
 <script>
+
+/* ASOSIY O'ZGARUVCHILAR */
 
 let category = "";
 let boxNumber = "";
 let receiverType = "";
 
 
-/* EKRAN ALMASHTIRISH */
+/* SAHIFANI ALMASHTIRISH */
 
 function goTo(number){
 
-    document
-        .querySelectorAll(".screen")
-        .forEach(screen => {
+    document.querySelectorAll(".screen").forEach(function(screen){
 
-            screen.classList.remove("active");
+        screen.classList.remove("active");
 
-        });
-
-
-    document
-        .getElementById("screen" + number)
-        .classList.add("active");
-
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
     });
 
+    const nextScreen =
+        document.getElementById("screen" + number);
+
+    if(nextScreen){
+        nextScreen.classList.add("active");
+    }
+
+    window.scrollTo(0,0);
 }
 
 
-/* KATEGORIYA */
+/* GIRL / BOY / KIDS */
 
 function selectCategory(value){
 
     category = value;
 
+    const title =
+        document.getElementById("boxCategoryTitle");
 
-    document
-        .getElementById("boxCategoryTitle")
-        .innerText =
+    title.textContent =
         value + " MYSTERY BOX";
-
 
     createBoxes();
 
-
     goTo(2);
-
 }
 
 
-/* 100 TA BOX */
+/* BOX RAQAMLARI */
 
 function createBoxes(){
 
@@ -961,103 +702,86 @@ function createBoxes(){
 
     grid.innerHTML = "";
 
-
-    for(let i=1;i<=100;i++){
+    for(let i = 1; i <= 100; i++){
 
         const button =
             document.createElement("button");
 
+        button.type = "button";
 
-        button.className="box";
+        button.className = "box";
 
-
-        button.innerText =
+        button.textContent =
             String(i).padStart(2,"0");
 
+        button.addEventListener("click",function(){
 
-        button.onclick=function(){
+            document.querySelectorAll(".box").forEach(function(b){
 
-            document
-                .querySelectorAll(".box")
-                .forEach(b=>{
-                    b.classList.remove("selected");
-                });
+                b.classList.remove("selected");
 
+            });
 
             button.classList.add("selected");
-
 
             boxNumber =
                 String(i).padStart(2,"0");
 
-
-            setTimeout(()=>{
+            setTimeout(function(){
 
                 goTo(3);
 
-            },250);
+            },200);
 
-        };
-
+        });
 
         grid.appendChild(button);
-
     }
-
 }
 
 
-/* KIM UCHUN */
+/* O'ZIM / BOSHQA */
 
 function chooseReceiver(type){
 
     receiverType = type;
 
+    const selfBtn =
+        document.getElementById("selfBtn");
 
-    document
-        .getElementById("selfBtn")
-        .classList.remove("active");
+    const otherBtn =
+        document.getElementById("otherBtn");
 
+    const selfForm =
+        document.getElementById("selfForm");
 
-    document
-        .getElementById("otherBtn")
-        .classList.remove("active");
-
-
-    document
-.getElementById("selfForm")
-        .classList.remove("active");
+    const otherForm =
+        document.getElementById("otherForm");
 
 
-    document
-        .getElementById("otherForm")
-        .classList.remove("active");
+    selfBtn.classList.remove("active");
+
+    otherBtn.classList.remove("active");
+
+    selfForm.classList.remove("active");
+
+    otherForm.classList.remove("active");
 
 
     if(type === "self"){
 
-        document
-            .getElementById("selfBtn")
-            .classList.add("active");
+        selfBtn.classList.add("active");
 
-
-        document
-            .getElementById("selfForm")
-            .classList.add("active");
+        selfForm.classList.add("active");
 
     }
 
 
     if(type === "other"){
 
-        document
-            .getElementById("otherBtn")
-            .classList.add("active");
+        otherBtn.classList.add("active");
 
-
-        document
-            .getElementById("otherForm")
-            .classList.add("active");
+        otherForm.classList.add("active");
 
     }
 
@@ -1071,18 +795,14 @@ function showSelfSummary(){
     const name =
         document.getElementById("selfName").value.trim();
 
-
     const age =
         document.getElementById("selfAge").value.trim();
-
 
     const message =
         document.getElementById("selfMessage").value.trim();
 
-
     const phone =
         document.getElementById("selfPhone").value.trim();
-
 
     const address =
         document.getElementById("selfAddress").value.trim();
@@ -1095,54 +815,31 @@ function showSelfSummary(){
         );
 
         return;
-
     }
 
 
-    document
-        .getElementById("summaryBox")
-        .innerText =
+    document.getElementById("summaryBox").textContent =
         category + " — BOX #" + boxNumber;
 
-
-    document
-        .getElementById("summaryReceiver")
-        .innerText =
-        name + " (o'zi uchun)";
-
-
-    document
-        .getElementById("summaryAge")
-        .innerText =
-        age + " yosh";
-
-
-    document
-        .getElementById("summarySender")
-        .innerText =
+    document.getElementById("summaryReceiver").textContent =
         name;
 
+    document.getElementById("summaryAge").textContent =
+        age + " yosh";
 
-    document
-        .getElementById("summaryMessage")
-        .innerText =
+    document.getElementById("summarySender").textContent =
+        "—";
+
+    document.getElementById("summaryMessage").textContent =
         message || "Xabar qoldirilmagan";
 
-
-    document
-        .getElementById("summaryPhone")
-        .innerText =
+    document.getElementById("summaryPhone").textContent =
         phone;
 
-
-    document
-        .getElementById("summaryAddress")
-        .innerText =
+    document.getElementById("summaryAddress").textContent =
         address;
 
-
     goTo(4);
-
 }
 
 
@@ -1153,26 +850,20 @@ function showOtherSummary(){
     const receiverName =
         document.getElementById("receiverName").value.trim();
 
-
     const age =
         document.getElementById("receiverAge").value.trim();
-
 
     const message =
         document.getElementById("message").value.trim();
 
-
     const sender =
         document.getElementById("senderName").value.trim();
-
 
     const senderPhone =
         document.getElementById("senderPhone").value.trim();
 
-
     const receiverPhone =
         document.getElementById("receiverPhone").value.trim();
-
 
     const address =
         document.getElementById("address").value.trim();
@@ -1192,54 +883,31 @@ function showOtherSummary(){
         );
 
         return;
-
     }
 
 
-    document
-        .getElementById("summaryBox")
-        .innerText =
+    document.getElementById("summaryBox").textContent =
         category + " — BOX #" + boxNumber;
 
-
-    document
-        .getElementById("summaryReceiver")
-        .innerText =
+    document.getElementById("summaryReceiver").textContent =
         receiverName;
 
-
-    document
-        .getElementById("summaryAge")
-        .innerText =
+    document.getElementById("summaryAge").textContent =
         age + " yosh";
 
-
-    document
-        .getElementById("summarySender")
-        .innerText =
+    document.getElementById("summarySender").textContent =
         sender;
 
-
-    document
-        .getElementById("summaryMessage")
-        .innerText =
+    document.getElementById("summaryMessage").textContent =
         message || "Xabar qoldirilmagan";
 
-
-    document
-        .getElementById("summaryPhone")
-        .innerText =
+    document.getElementById("summaryPhone").textContent =
         receiverPhone;
 
-
-    document
-        .getElementById("summaryAddress")
-        .innerText =
+    document.getElementById("summaryAddress").textContent =
         address;
 
-
     goTo(4);
-
 }
 
 
@@ -1247,20 +915,13 @@ function showOtherSummary(){
 
 function finishOrder(){
 
-    document
-        .getElementById("finalBox")
-        .innerText =
-        category +
-        " BOX #" +
-        boxNumber;
-
+    document.getElementById("finalBox").textContent =
+        category + " BOX #" + boxNumber;
 
     goTo(5);
-
 }
 
 </script>
-
 
 </body>
 </html>
