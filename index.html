@@ -187,41 +187,11 @@ header{
     margin-bottom:25px;
 }
 
-label{
-    display:block;
-    margin:17px 0 7px;
-    color:#67523d;
-    font-size:14px;
-}
-
-input,
-textarea,
-select{
-    width:100%;
-    padding:14px;
-    border-radius:11px;
-    border:1px solid #d8c7ad;
-    background:#fffdf9;
-    color:#493827;
-    font-family:Georgia,serif;
-    outline:none;
-}
-
-input:focus,
-textarea:focus,
-select:focus{
-    border-color:#b9975b;
-}
-
-textarea{
-    min-height:120px;
-    resize:vertical;
-}
-
 .choice{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:12px;
+    margin-bottom:25px;
 }
 
 .choice button{
@@ -240,6 +210,43 @@ textarea{
     border-color:#a68149;
 }
 
+.form-group{
+    display:none;
+}
+
+.form-group.active{
+    display:block;
+}
+
+label{
+    display:block;
+    margin:17px 0 7px;
+    color:#67523d;
+    font-size:14px;
+}
+
+input,
+textarea{
+    width:100%;
+    padding:14px;
+    border-radius:11px;
+    border:1px solid #d8c7ad;
+    background:#fffdf9;
+    color:#493827;
+    font-family:Georgia,serif;
+    outline:none;
+}
+
+input:focus,
+textarea:focus{
+    border-color:#b9975b;
+}
+
+textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
 .button{
     display:block;
     width:100%;
@@ -248,11 +255,10 @@ textarea{
     border:0;
     border-radius:12px;
     background:#a98650;
-    color:white;
-    font-family:Georgia,serif;
+    color:white;font-family:Georgia,serif;
     font-size:14px;
     letter-spacing:1px;
-cursor:pointer;
+    cursor:pointer;
 }
 
 .button:hover{
@@ -494,7 +500,7 @@ cursor:pointer;
 
 
 
-<!-- 3. WHO FOR -->
+<!-- 3. KIM UCHUN -->
 
 <section id="screen3" class="screen">
 
@@ -504,24 +510,103 @@ cursor:pointer;
             💌 Bu sovg'a kim uchun?
         </h2>
 
+
         <div class="choice">
 
-            <button id="selfBtn"
-                    onclick="chooseReceiver('O‘zim uchun')">
+            <button
+                id="selfBtn"
+                onclick="chooseReceiver('self')">
 
-                O'zim uchun
+                🎁 O'zim uchun
 
             </button>
 
-            <button id="otherBtn"
-                    onclick="chooseReceiver('Boshqa inson uchun')">
 
-                Boshqa inson uchun
+            <button
+                id="otherBtn"
+                onclick="chooseReceiver('other')">💌 Boshqa inson uchun
 
             </button>
 
         </div>
- <div id="receiverFields">
+
+
+
+        <!-- O'ZIM UCHUN -->
+
+        <div id="selfForm" class="form-group">
+
+            <label>
+                Ismingiz *
+            </label>
+
+            <input
+                id="selfName"
+                type="text"
+                placeholder="Ismingiz"
+            >
+
+
+            <label>
+                Yoshingiz *
+            </label>
+
+            <input
+                id="selfAge"
+                type="number"
+                placeholder="Masalan: 24"
+                min="1"
+                max="120"
+            >
+
+
+            <label>
+                Box ichiga yozmoqchi bo'lgan gapingiz 💌
+            </label>
+
+            <textarea
+                id="selfMessage"
+                maxlength="300"
+                placeholder="O'zingiz uchun maxsus xabar..."
+            ></textarea>
+
+
+            <label>
+                Telefon raqamingiz *
+            </label>
+
+            <input
+                id="selfPhone"
+                type="tel"
+                placeholder="+998 90 123 45 67"
+            >
+
+
+            <label>
+                Yetkazib berish manzili *
+            </label>
+
+            <textarea
+                id="selfAddress"
+                placeholder="Shahar, tuman, ko'cha, uy..."
+            ></textarea>
+
+
+            <button
+                class="button"
+                onclick="showSelfSummary()">
+
+                DAVOM ETISH →
+
+            </button>
+
+        </div>
+
+
+
+        <!-- BOSHQA INSON UCHUN -->
+
+        <div id="otherForm" class="form-group">
 
             <label>
                 Qabul qiluvchining ismi *
@@ -535,7 +620,7 @@ cursor:pointer;
 
 
             <label>
-                Yoshi *
+                Qabul qiluvchining yoshi *
             </label>
 
             <input
@@ -559,7 +644,7 @@ cursor:pointer;
 
 
             <label>
-                Yuboruvchi ismi *
+                Yuboruvchining ismi *
             </label>
 
             <input
@@ -603,7 +688,7 @@ cursor:pointer;
 
             <button
                 class="button"
-                onclick="showSummary()">
+                onclick="showOtherSummary()">
 
                 DAVOM ETISH →
 
@@ -614,15 +699,19 @@ cursor:pointer;
     </div>
 
 
-    <button class="back" onclick="goTo(2)">
+    <button
+        class="back"
+        onclick="goTo(2)">
+
         ← Orqaga
+
     </button>
 
 </section>
 
 
 
-<!-- 4. SUMMARY -->
+<!-- 4. BUYURTMA XULOSASI -->
 
 <section id="screen4" class="screen">
 
@@ -639,8 +728,9 @@ cursor:pointer;
                 BOX
             </div>
 
-            <div class="summary-value"
-                 id="summaryBox">
+            <div
+                class="summary-value"
+                id="summaryBox">
             </div>
 
         </div>
@@ -649,11 +739,11 @@ cursor:pointer;
         <div class="summary-row">
 
             <div class="summary-label">
-                QABUL QILUVCHI
-            </div>
+                QABUL QILUVCHI</div>
 
-            <div class="summary-value"
-                 id="summaryReceiver">
+            <div
+                class="summary-value"
+                id="summaryReceiver">
             </div>
 
         </div>
@@ -665,8 +755,9 @@ cursor:pointer;
                 YOSH
             </div>
 
-            <div class="summary-value"
-                 id="summaryAge">
+            <div
+                class="summary-value"
+                id="summaryAge">
             </div>
 
         </div>
@@ -678,8 +769,9 @@ cursor:pointer;
                 YUBORUVCHI
             </div>
 
-            <div class="summary-value"
-                 id="summarySender">
+            <div
+                class="summary-value"
+                id="summarySender">
             </div>
 
         </div>
@@ -691,8 +783,9 @@ cursor:pointer;
                 BOX ICHIDAGI XABAR
             </div>
 
-            <div class="summary-value"
-                 id="summaryMessage">
+            <div
+                class="summary-value"
+                id="summaryMessage">
             </div>
 
         </div>
@@ -704,8 +797,9 @@ cursor:pointer;
                 TELEFON
             </div>
 
-            <div class="summary-value"
-                 id="summaryPhone">
+            <div
+                class="summary-value"
+                id="summaryPhone">
             </div>
 
         </div>
@@ -714,11 +808,12 @@ cursor:pointer;
         <div class="summary-row">
 
             <div class="summary-label">
-                YETKAZIB BERISH
+                MANZIL
             </div>
 
-            <div class="summary-value"
-                 id="summaryAddress">
+            <div
+                class="summary-value"
+                id="summaryAddress">
             </div>
 
         </div>
@@ -735,18 +830,23 @@ cursor:pointer;
     </div>
 
 
-    <button class="back" onclick="goTo(3)">
+    <button
+        class="back"
+        onclick="goTo(3)">
+
         ← Ma'lumotlarni o'zgartirish
+
     </button>
 
 </section>
 
 
 
-<!-- 5. SUCCESS -->
+<!-- 5. YAKUN -->
 
 <section id="screen5" class="screen">
-<div class="summary">
+
+    <div class="summary">
 
         <div class="success">
 
@@ -761,14 +861,14 @@ cursor:pointer;
             <p>
 
                 MYSTIQ BOX
+
                 <br><br>
 
                 <b id="finalBox"></b>
 
                 <br><br>
 
-                Sizning sirli sovg'angiz
-                tayyorlanadi.
+                Sirli sovg'angiz tayyorlanadi.
 
                 <br><br>
 
@@ -797,13 +897,12 @@ cursor:pointer;
 
 <script>
 
-
 let category = "";
 let boxNumber = "";
 let receiverType = "";
 
 
-/* SCREEN */
+/* EKRAN ALMASHTIRISH */
 
 function goTo(number){
 
@@ -815,9 +914,11 @@ function goTo(number){
 
         });
 
+
     document
         .getElementById("screen" + number)
         .classList.add("active");
+
 
     window.scrollTo({
         top:0,
@@ -827,24 +928,28 @@ function goTo(number){
 }
 
 
-/* CATEGORY */
+/* KATEGORIYA */
 
 function selectCategory(value){
 
     category = value;
 
-    document.getElementById("boxCategoryTitle")
+
+    document
+        .getElementById("boxCategoryTitle")
         .innerText =
         value + " MYSTERY BOX";
 
+
     createBoxes();
+
 
     goTo(2);
 
 }
 
 
-/* BOXES */
+/* 100 TA BOX */
 
 function createBoxes(){
 
@@ -859,7 +964,9 @@ function createBoxes(){
         const button =
             document.createElement("button");
 
+
         button.className="box";
+
 
         button.innerText =
             String(i).padStart(2,"0");
@@ -875,6 +982,7 @@ function createBoxes(){
 
 
             button.classList.add("selected");
+
 
             boxNumber =
                 String(i).padStart(2,"0");
@@ -896,7 +1004,7 @@ function createBoxes(){
 }
 
 
-/* RECEIVER */
+/* KIM UCHUN */
 
 function chooseReceiver(type){
 
@@ -907,21 +1015,44 @@ function chooseReceiver(type){
         .getElementById("selfBtn")
         .classList.remove("active");
 
+
     document
         .getElementById("otherBtn")
         .classList.remove("active");
 
 
-    if(type === "O‘zim uchun"){
+    document.getElementById("selfForm")
+        .classList.remove("active");
+
+
+    document
+        .getElementById("otherForm")
+        .classList.remove("active");
+
+
+    if(type === "self"){
 
         document
             .getElementById("selfBtn")
             .classList.add("active");
 
-    }else{
+
+        document
+            .getElementById("selfForm")
+            .classList.add("active");
+
+    }
+
+
+    if(type === "other"){
 
         document
             .getElementById("otherBtn")
+            .classList.add("active");
+
+
+        document
+            .getElementById("otherForm")
             .classList.add("active");
 
     }
@@ -929,28 +1060,115 @@ function chooseReceiver(type){
 }
 
 
-/* SUMMARY */
+/* O'ZIM UCHUN */
 
-function showSummary(){
+function showSelfSummary(){
 
+    const name =
+        document.getElementById("selfName").value.trim();
+
+
+    const age =
+        document.getElementById("selfAge").value.trim();
+
+
+    const message =
+        document.getElementById("selfMessage").value.trim();
+
+
+    const phone =
+        document.getElementById("selfPhone").value.trim();
+
+
+    const address =
+        document.getElementById("selfAddress").value.trim();
+
+
+    if(!name  !age  !phone || !address){
+
+        alert(
+            "Iltimos, barcha majburiy maydonlarni to'ldiring."
+        );
+
+        return;
+
+    }
+
+
+    document
+        .getElementById("summaryBox")
+        .innerText =
+        category + " — BOX #" + boxNumber;
+
+
+    document
+        .getElementById("summaryReceiver")
+        .innerText =
+        name + " (o'zi uchun)";
+
+
+    document
+        .getElementById("summaryAge")
+        .innerText =
+        age + " yosh";
+
+
+    document
+        .getElementById("summarySender")
+        .innerText =
+        name;
+
+
+    document
+        .getElementById("summaryMessage")
+        .innerText =
+        message || "Xabar qoldirilmagan";
+
+
+    document
+        .getElementById("summaryPhone")
+        .innerText =
+        phone;
+
+
+    document
+        .getElementById("summaryAddress")
+        .innerText =
+        address;
+
+
+    goTo(4);
+
+}
+
+
+/* BOSHQA INSON UCHUN */
+
+function showOtherSummary(){
 
     const receiverName =
         document.getElementById("receiverName").value.trim();
 
+
     const age =
         document.getElementById("receiverAge").value.trim();
+
 
     const message =
         document.getElementById("message").value.trim();
 
+
     const sender =
         document.getElementById("senderName").value.trim();
+
 
     const senderPhone =
         document.getElementById("senderPhone").value.trim();
 
+
     const receiverPhone =
         document.getElementById("receiverPhone").value.trim();
+
 
     const address =
         document.getElementById("address").value.trim();
@@ -974,39 +1192,45 @@ function showSummary(){
     }
 
 
-    document.getElementById("summaryBox")
+    document
+        .getElementById("summaryBox")
         .innerText =
         category + " — BOX #" + boxNumber;
 
 
-    document.getElementById("summaryReceiver")
+    document
+        .getElementById("summaryReceiver")
         .innerText =
         receiverName;
 
 
-    document.getElementById("summaryAge")
+    document
+        .getElementById("summaryAge")
         .innerText =
         age + " yosh";
 
 
-    document.getElementById("summarySender")
+    document
+        .getElementById("summarySender")
         .innerText =
         sender;
 
 
-    document.getElementById("summaryMessage")
+    document
+        .getElementById("summaryMessage")
         .innerText =
         message || "Xabar qoldirilmagan";
 
 
-    document.getElementById("summaryPhone")
+    document
+        .getElementById("summaryPhone")
         .innerText =
         receiverPhone;
 
 
-    document.getElementById("summaryAddress")
-        .
-innerText =
+    document
+        .getElementById("summaryAddress")
+        .innerText =
         address;
 
 
@@ -1015,13 +1239,17 @@ innerText =
 }
 
 
-/* FINISH */
+/* BUYURTMA YAKUNI */
 
 function finishOrder(){
 
-    document.getElementById("finalBox")
+    document
+        .getElementById("finalBox")
         .innerText =
-        category + " BOX #" + boxNumber;
+        category +
+        " BOX #" +
+        boxNumber;
+
 
     goTo(5);
 
