@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MYSTIQ BOX — Admin</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:linear-gradient(135deg,#fffaf5,#f8edf2);
+  color:#3b2c32;
+}
+
+header{
+  background:rgba(255,255,255,.85);
+  padding:25px;
+  text-align:center;
+  border-bottom:1px solid #eadde2;
+}
+
+.logo{
+  font-family:Georgia,serif;
+  font-size:30px;
+  letter-spacing:3px;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:25px 15px;
+}
+
+.login{
+  max-width:400px;
+  margin:80px auto;
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 10px 35px #00000012;
+  text-align:center;
+}
+
+input,select{
+  width:100%;
+  padding:12px;
+  margin:7px 0;
+  border:1px solid #ddd;
+  border-radius:10px;
+}
+
+button{
+  border:0;
+  padding:12px 20px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.login button{
+  width:100%;
+  background:#3b2c32;
+  color:white;
+}
+
+#error{
+  color:#b33;
+  margin-top:10px;
+}
+
+.dashboard{
+  display:none;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.card{
+  background:white;
+  padding:20px;
+  border-radius:18px;
+  box-shadow:0 7px 25px #0000000d;
+}
+
+.card small{
+  color:#88777d;
+}
+
+.card strong{
+  display:block;
+  font-size:25px;
+  margin-top:8px;
+}
+
+.popular{
+  background:white;
+  padding:20px;
+  border-radius:18px;
+  margin:20px 0;
+  box-shadow:0 7px 25px #0000000d;
+}
+
+.numbers{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.number{
+  background:#faf0f4;
+  padding:10px 15px;
+  border-radius:10px;
+}
+
+.search{
+  max-width:400px;
+  margin-bottom:15px;
+}
+
+.table{
+  overflow:auto;
+  background:white;
+  border-radius:18px;
+}
+
+table{
+  width:100%;
+  min-width:1000px;
+  border-collapse:collapse;
+}
+
+th,td{
+  padding:12px;
+  border-bottom:1px solid #eee;
+  text-align:left;
+  font-size:14px;
+}
+
+th{
+  background:#faf6f7;
+}
+
+.refresh{
+  background:#3b2c32;
+  color:white;
+}
+
+@media(max-width:700px){
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">MYSTIQ BOX</div>
+  <div>Sotuvchi boshqaruv paneli</div>
+</header>
+
+<div id="login" class="login">
+
+  <h2>🔐 Sotuvchi paneli</h2>
+
+  <p>Kirish kodini kiriting</p>
+
+  <input
+    type="password"
+    id="password"
+    placeholder="Kirish kodi"
+  >
+
+  <button onclick="login()">Kirish</button>
+
+  <div id="error"></div>
+
+</div>
+
+
+<div id="dashboard" class="dashboard">
+
+<div class="container">
+
+<div class="stats">
+
+  <div class="card">
+    <small>Bugungi buyurtmalar</small>
+    <strong id="today">0</strong>
+  </div>
+
+  <div class="card">
+    <small>Jami buyurtmalar</small>
+    <strong id="total">0</strong>
+  </div>
+
+  <div class="card">
+    <small>Yangi buyurtmalar</small>
+    <strong id="new">0</strong>
+  </div>
+
+  <div class="card">
+    <small>Jami tushum</small>
+    <strong id="money">0 so'm</strong>
+  </div>
+
+</div>
+
+
+<div class="popular">
+
+  <h3>🔢 Eng ko‘p tanlangan raqamlar</h3>
+
+  <div id="numbers" class="numbers">
+    Hozircha ma'lumot yo‘q
+  </div>
+
+</div>
+
+
+<input
+  class="search"
+  id="search"
+  placeholder="🔎 Ism, buyurtma yoki raqam..."
+  oninput="showOrders()"
+>
+
+<button class="refresh" onclick="loadOrders()">
+  ↻ Yangilash
+</button>
+
+
+<div class="table">
+
+<table>
+
+<thead>
+<tr>
+  <th>Buyurtma</th>
+  <th>Box</th>
+  <th>Qabul qiluvchi</th>
+  <th>Yosh</th>
+  <th>Telefon</th>
+  <th>Manzil</th>
+  <th>Narx</th>
+  <th>Status</th>
+</tr>
+</thead>
+
+<tbody id="orders"></tbody>
+
+</table>
+
+</div>
+
+</div>
+</div>
+
+
+<script>
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbyyjrtlTK5HvroIbixfh685qYyIvKKMB4R30gCfjbmW3icCA6KedkG8FDbCkWqAmsqiVw/exec";
+
+const ADMIN_KEY = "MYSTIQ2026";
+
+let orders = [];
+
+
+function login(){
+
+  const password =
+    document.getElementById("password").value;
+
+  if(password === ADMIN_KEY){
+
+    document.getElementById("login").style.display="none";
+
+    document.getElementById("dashboard").style.display="block";
+
+    loadOrders();
+
+  }else{
+
+    document.getElementById("error").
