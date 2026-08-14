@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MYSTIQ BOX</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0d0d12;
+    color: white;
+    min-height: 100vh;
+}
+
+header {
+    text-align: center;
+    padding: 45px 20px 25px;
+}
+
+.logo {
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.subtitle {
+    margin-top: 10px;
+    color: #aaa;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.categories {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.category {
+    border: 1px solid #333;
+    background: #17171f;
+    border-radius: 18px;
+    padding: 30px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.category:hover {
+    transform: translateY(-4px);
+    border-color: white;
+}
+
+.emoji {
+    font-size: 40px;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.box-section {
+    display: none;
+}
+
+.selected-info {
+    text-align: center;
+    color: #aaa;
+    margin-bottom: 20px;
+}
+
+.box-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.box {
+    background: #191922;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 18px 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.box:hover {
+    background: #292936;
+}
+
+.box.selected {
+    background: white;
+    color: black;
+}
+
+.result {
+    display: none;
+    text-align: center;
+    margin-top: 30px;
+    padding: 30px 20px;
+    border: 1px solid #333;
+    border-radius: 20px;
+    background: #17171f;
+}
+
+.result h3 {
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+
+.mystery {
+    color: #aaa;
+    margin: 15px 0 25px;
+}
+
+.confirm {
+    border: none;
+    background: white;
+    color: black;
+    padding: 15px 25px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.back {
+    display: block;
+    margin: 25px auto;
+    background: transparent;
+    color: #aaa;
+    border: none;
+    cursor: pointer;
+}
+
+@media(max-width:600px) {
+    .categories {
+        grid-template-columns: 1fr;
+    }
+
+    .box-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">MYSTIQ BOX 🎁</div>
+
+    <div class="subtitle">
+        Your box. Your number. Your mystery.
+    </div>
+</header>
+
+<div class="container">
+
+    <div id="categorySection">
+
+        <h2>Box turini tanlang</h2>
+
+        <div class="categories">
+
+            <div class="category" onclick="selectCategory('GIRL')">
+                <span class="emoji">🎀</span>
+                GIRL BOX
+            </div>
+
+            <div class="category" onclick="selectCategory('BOY')">
+                <span class="emoji">🖤</span>
+                BOY BOX
+            </div>
+
+            <div class="category" onclick="selectCategory('KIDS')">
+                <span class="emoji">🧸</span>
+                KIDS BOX
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="box-section" id="boxSection">
+
+        <h2 id="categoryTitle"></h2>
+
+        <div class="selected-info">
+            Ichidagi mahsulot — sir 🤫
+        </div>
+
+        <div class="box-grid" id="boxGrid"></div>
+
+        <div class="result" id="result">
+
+            <h3 id="resultTitle"></h3>
+
+            <div class="mystery">
+                🎁 Sizning boxingiz tanlandi!
+                <br><br>
+                Ichida nima borligini uyga borguncha bilmaysiz.
+            </div>
+
+            <button class="confirm" onclick="confirmBox()">
+                BOXNI TASDIQLASH
+            </button>
+
+        </div>
+
+        <button class="back" onclick="goBack()">
+            ← Orqaga
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let selectedCategory = "";
+let selectedBox = "";
+
+function selectCategory(category) {
+
+    selectedCategory = category;
+
+    document.getElementById("categorySection").style.display = "none";
+
+    document.getElementById("boxSection").style.display = "block";
+
+    document.getElementById("categoryTitle").innerText =
+        "🎁 " + category + " BOX";
+
+    createBoxes();
+}
+
+function createBoxes() {
+
+    const grid = document.getElementById("boxGrid");
+
+    grid.innerHTML = "";
+
+    for(let i = 1; i <= 100; i++) {
+
+        const button = document.createElement("button");
+
+        button.className = "box";
+
+        button.innerText = String(i).padStart(2, "0");
+
+        button.onclick = function() {
+            selectBox(i, button);
+        };
+
+        grid.appendChild(button);
+    }
+}
+
+function selectBox(number, button) {
+
+    document.querySelectorAll(".box").forEach(box => {
+        box.classList.remove("selected");
+    });
+
+    button.classList.add("selected");
+
+    selectedBox = number;
+
+    document.getElementById("result").style.display = "block";
+
+    document.getElementById("resultTitle").innerText =
+        "🎁 BOX #" + String(number).padStart(2, "0");
+}
+
+function confirmBox() {
+
+    alert(
+        "Siz " +
+        selectedCategory +
+        " BOX #" +
+        String(selectedBox).padStart(2, "0") +
+        " ni tanladingiz!"
+    );
+
+}
+
+function goBack() {
+
+    document.getElementById("boxSection").style.display = "none";
+
+    document.getElementById("categorySection").style.display = "block";
+
+    document.getElementById("result").style.display = "none";
+}
+
+</script>
+
+</body>
+</html>
