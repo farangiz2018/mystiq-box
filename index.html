@@ -995,30 +995,7 @@ async function finishOrder(){
 
     }
 }
-    function sendTelegramMessage(message) {
-  const url =
-    "https://api.telegram.org/bot" +
-    TELEGRAM_BOT_TOKEN +
-    "/sendMessage";
-
-  const payload = {
-    chat_id: TELEGRAM_CHAT_ID,
-    text: message
-  };
-
-  const response = UrlFetchApp.fetch(url, {
-    method: "post",
-    contentType: "application/json",
-    payload: JSON.stringify(payload),
-    muteHttpExceptions: true
-  });
-
-  Logger.log(response.getContentText());
-}
-function testTelegram() {
-  sendTelegramMessage("🎁 MYSTIQ BOX TEST\n\nTelegram xabarnomasi muvaffaqiyatli ulandi! ✅");
-}
-</script>
+    </script>
 
 </body>
 </html>
